@@ -28,29 +28,33 @@ def login_view(request):
 
 
 def signup_view(request):
-    signup_form = UserSignUpForm(request.POST or None)
-    if signup_form.is_valid():
-        email = signup_form.cleaned_data.get('email')
-        first_name = signup_form.cleaned_data.get('first_name')
-        last_name = signup_form.cleaned_data.get('last_name')
-        password = signup_form.cleaned_data.get('password')
-        try:
-            user = get_user_model().objects.create(
-                email=email,
-                first_name=first_name,
-                last_name=last_name,
-                password=make_password(password),
-                is_active=True
-            )
-            login(request, user)
-            return redirect('users:profile')
+    if request.method == 'POST':
+        signup_form = UserSignUpForm(request.POST or None)
+        if signup_form.is_valid():
+            email = signup_form.cleaned_data.get('email')
+            first_name = signup_form.cleaned_data.get('first_name')
+            last_name = signup_form.cleaned_data.get('last_name')
+            phone_number = signup_form.cleaned_data.get('phone_number') 
+            password = signup_form.cleaned_data.get('password')
+            try:
+                user = get_user_model().objects.create(
+                    email=email,
+                    first_name=first_name,
+                    last_name=last_name,
+                    phone_number=phone_number,
+                    password=make_password(password),
+                    is_active=True
+                )
+                login(request, user)
+                return redirect('users:profile')
 
-        except Exception as e:
-            print(e)
-            return JsonResponse({'detail': f'{e}'})
+            except Exception as e:
+                print(e)
+                return JsonResponse({'detail': f'{e}'})
 
-    messages.warning(request, 'Las Contrasenas no coinciden')
-    return redirect('network:home')
+        messages.warning(request, 'Las Contrasenas no coinciden')
+        return redirect('network:home')
+    return render(request, 'user/signup.html')
 
 def logout_view(request):
     logout(request)

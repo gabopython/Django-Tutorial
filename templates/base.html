@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  <link rel="stylesheet" href="../static/styles.css">
   <meta charset="utf-8">
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
@@ -16,7 +17,6 @@
 </head>
 
 <body>
-  {% include "user/login.html" %}
   <header>
     <nav class="navbar shadow navbar-light bg-light">
       <div class="container-fluid">
@@ -33,9 +33,41 @@
             <img src={{ user.profile_pic.url }} class="rounded-circle" height="30" width='30' alt="" loading="lazy" />
           </a>
           {% else %}
-          <button type="button" class="btn btn-primary" data-mdb-toggle='modal' data-mdb-target='#loginModal'>
-            Iniciar Sesión
-          </button>
+          <div class="container text-center mt-1">
+
+            {#<button class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#signupModal">Signup</button>#}
+
+            <a href={% url 'users:signup' %}>
+              <button class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#signupModal">Signup</button>
+            </a>
+            <button class="btn btn-success" data-mdb-toggle="modal" data-mdb-target="#loginModal">Login</button>
+          </div>
+
+          <!-- Login Modal -->
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="{% url 'users:login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="loginEmail" class="form-label">Email address</label>
+                      {{ loginForm.email }}
+                    </div>
+                    <div class="mb-3">
+                      <label for="loginPassword" class="form-label">Password</label>
+                      {{ loginForm.password }}
+                    </div>
+                    <button type="submit" class="btn btn-success">Login</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endif %}
         </div>
       </div>
@@ -70,10 +102,10 @@
       success: function (response) {
         $('#' + post_id).load(location.href + ' #' + post_id)
       },
-      error: function (xhr, errmsg, err) {}
+      error: function (xhr, errmsg, err) { }
     });
   })
-  
+
   $(document).on('click', '.comment-button', function (e) {
     e.preventDefault();
     var post_id = $(this).data('post');
@@ -90,9 +122,10 @@
           $(".comment-div").load(location.href + " .comment-div")
           $("#comment_form")[0].reset()
         },
-        error: function (xhr, errmsg, err) {}
+        error: function (xhr, errmsg, err) { }
       });
     }
   })
 </script>
+
 </html>

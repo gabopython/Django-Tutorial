@@ -1,0 +1,52 @@
+{% extends "../base.html" %}
+
+{% block content %}
+<div class="row no-gutters m-2">
+    <div class="col-md-8">
+        <img src="https://raw.githubusercontent.com/gabopython/IMAGES/refs/heads/main/WhatsApp%20Image%202025-03-21%20at%2013.21.12.jpeg"
+            alt="Signup Image" class="img-fluid m-4">
+    </div>
+    <div class="col-md-4">
+        <div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title custom-title" id="signupModalLabel">Registro</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'users:signup' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label for="signupFirstName" class="form-label form-label-custom">Nombre*</label>
+                            {{ signupForm.first_name }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="signupLastName" class="form-label form-label-custom">Apellido*</label>
+                            {{ signupForm.last_name }}
+                        </div>
+                    </div>
+                    <div class="mb-1">
+                        <label for="signupPhoneNumber" class="form-label form-label-custom">Celular*</label>
+                        {{ signupForm.phone_number }}
+                    </div>
+                    <div class="mb-1">
+                        <label for="signupEmail" class="form-label form-label-custom">Email*</label>
+                        {{ signupForm.email }}
+                    </div>
+                    <div class="mb-1">
+                        <label for="signupPassword" class="form-label form-label-custom">Contraseña*</label>
+                        {{ signupForm.password }}
+                    </div>
+                    <div class="mb-1">
+                        <label for="signupPassword" class="form-label form-label-custom">Confirmar
+                            Contraseña*</label>
+                        {{ signupForm.password2 }}
+                    </div>
+                    <button type="submit" class="btn btn-primary custom-btn mt-2 w-100">Continuar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

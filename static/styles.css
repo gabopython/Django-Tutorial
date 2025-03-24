@@ -1,0 +1,23 @@
+.custom-btn {
+    background-color: #F60055 !important;
+    border-color: #F60055 !important;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.custom-btn:hover {
+    background-color: #e5004e !important;
+    border-color: #e5004e !important;
+}
+
+.custom-title {
+    color: #F60055 !important;
+}
+
+.modal-dialog-custom {
+    max-width: 95% !important;
+}
+
+.form-label-custom {
+    margin-bottom: 0 !important;
+}

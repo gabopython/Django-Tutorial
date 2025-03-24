@@ -49,6 +49,16 @@ class UserSignUpForm(forms.Form):
                 'class': 'form-control'
             }
         ))
+    phone_number = forms.CharField(
+        max_length=15,
+        widget=forms.TextInput(
+            attrs={
+                'type': 'text',
+                'class': 'form-control'
+            }
+        )
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
