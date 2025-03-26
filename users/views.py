@@ -8,23 +8,25 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import UserLoginForm, UserSignUpForm
 
 
-def login_view(request):
-    login_form = UserLoginForm(request.POST or None)
-    if login_form.is_valid():
-        email = login_form.cleaned_data.get('email')
-        password = login_form.cleaned_data.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'Has iniciado sesion correctamente')
-            return redirect('network:home')
-        else:
-            messages.warning(
-                request, 'Correo Electronico o Contrasena invalida')
-            return redirect('network:home')
+def login_view(request):    
+    if request.method == 'POST':
+        login_form = UserLoginForm(request.POST or None)
+        if login_form.is_valid():
+            email = login_form.cleaned_data.get('email')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Has iniciado sesion correctamente')
+                return redirect('network:home')
+            else:
+                messages.warning(
+                    request, 'Correo Electronico o Contrasena invalida')
+                return redirect('network:home')
 
-    messages.error(request, 'Formulario Invalido')
-    return redirect('network:home')
+        messages.error(request, 'Formulario Invalido')
+        return redirect('network:home')
+    return render(request, 'user/login.html')
 
 
 def signup_view(request):

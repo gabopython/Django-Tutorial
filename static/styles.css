@@ -21,3 +21,59 @@
 .form-label-custom {
     margin-bottom: 0 !important;
 }
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 90%;
+}
+
+.login-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 90%;
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #e6007e;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #c5006b;
+}
+
+.links a {
+    font-size: 14px;
+    color: #e6007e;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.image-container {
+    position: relative;
+    width: 60%;
+    height: 90%;
+    background: url('https://raw.githubusercontent.com/gabopython/IMAGES/refs/heads/main/WhatsApp%20Image%202025-03-23%20at%2012.36.01%20-%20Copy.jpeg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+}

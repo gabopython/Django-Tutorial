@@ -1,0 +1,29 @@
+{% extends "../base.html" %}
+
+{% block content %}
+
+<div class="image-container mt-4">
+    <div class="login-container">
+        <div class="login-box">
+            <img src="https://raw.githubusercontent.com/gabopython/IMAGES/refs/heads/main/logo_mw.jpeg"
+                alt="Mujeres WOW" class="logo">
+            <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3 text-start">
+                    <label class="form-label">Correo Electrónico</label>
+                    {{ loginForm.email }}
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label">Contraseña</label>
+                    {{ loginForm.password }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100 custom-btn">INGRESAR</button>
+                <div class="links mt-3">
+                    <a href="#">¿Olvidaste tu contraseña?</a> | <a href="#">¿Usuario nuevo? Regístrate</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
